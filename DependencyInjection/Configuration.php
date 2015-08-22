@@ -39,6 +39,10 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue(1)
                     ->info('A seed to make sure faker generates data consistently across runs, set to null to disable')
                 ->end()
+                ->scalarNode('fixtures_path')
+                    ->defaultValue('DataFixtures/ORM')
+                    ->info('Path to which fixtures will be loaded from')
+                ->end()
             ->end()
         ;
 

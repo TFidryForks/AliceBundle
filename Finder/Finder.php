@@ -24,7 +24,23 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class Finder
 {
-    const BUNDLE_FIXTURES_PATH = 'DataFixtures/ORM';
+    /**
+     * @var string
+     */
+    private $bundleFixturesPath;
+
+    /**
+     * @example
+     *  new Finder('DataFixtures/ORM')
+     *  new Finder('Resources/fixtures/ORM')
+     *
+     * @param string $bundleFixturesPath
+     */
+    public function __construct($bundleFixturesPath)
+    {
+        $this->bundleFixturesPath = $bundleFixturesPath;
+    }
+
 
     /**
      * Looks at all the bundles registered in the application to return the bundles requested. An exception is thrown
@@ -67,7 +83,9 @@ class Finder
      * @param BundleInterface[] $bundles
      * @param string            $environment
      *
-     * @return string[] Fixtures files real paths.
+     * @return string[]                  Fixtures files real paths.
+     * @throws \InvalidArgumentException Invalid loader path or no fixtures could be found.
+     * @throws \RuntimeException         No valid path founds in which loading fixtures
      */
     public function getFixtures(KernelInterface $kernel, array $bundles, $environment)
     {
@@ -82,7 +100,7 @@ class Finder
 
             $fixtures = array_merge($fixtures, $this->getFixturesFromDirectory($path));
         }
-
+        
         if (0 === count($fixtures)) {
             throw new \InvalidArgumentException(
                 sprintf('Could not find any fixtures to load in: %s', "\n\n- ".implode("\n- ", $loadersPaths))
@@ -175,7 +193,8 @@ class Finder
      * @param BundleInterface[] $bundles
      * @param string            $environment
      *
-     * @return string[] Real paths to loaders.
+     * @return string[]          Real paths to loaders.
+     * @throws \RuntimeException No valid path found.
      */
     protected function getLoadersPaths(array $bundles, $environment)
     {
@@ -185,8 +204,9 @@ class Finder
         ];
 
         $paths = [];
+        $noFoundPaths = [];
         foreach ($bundles as $bundle) {
-            $path = sprintf('%s/%s', $bundle->getPath(), self::BUNDLE_FIXTURES_PATH);
+            $path = sprintf('%s/%s', $bundle->getPath(), $this->bundleFixturesPath);
             if (true === file_exists($path)) {
                 $paths[$path] = true;
                 try {
@@ -199,9 +219,17 @@ class Finder
                     }
                 } catch (\InvalidArgumentException $exception) {
                 }
+            } else {
+                $noFoundPaths[] = $path;
             }
         }
-        
+
+        if (0 === count($paths)) {
+            throw new \RuntimeException(
+                sprintf('No valid paths found. Tried the following paths: %s', "\n\n- ".implode("\n- ", $noFoundPaths))
+            );
+        }
+
         return array_keys($paths);
     }
 }

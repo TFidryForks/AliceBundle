@@ -42,6 +42,22 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config.yml');
+        switch ($this->getEnvironment()) {
+            case 'alt1':
+                $loader->load(__DIR__.'/config/config_alt1.yml');
+                break;
+
+            case 'alt2':
+                $loader->load(__DIR__.'/config/config_alt2.yml');
+                break;
+
+            case 'alt3':
+                $loader->load(__DIR__.'/config/config_alt3.yml');
+                break;
+
+            default:
+                $loader->load(__DIR__.'/config/config.yml');
+                break;
+        }
     }
 }
