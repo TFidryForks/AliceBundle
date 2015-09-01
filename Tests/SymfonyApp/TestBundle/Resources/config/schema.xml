@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="Hautelook\AliceBundle\Tests\SymfonyApp\TestBundle\Entity\Brand" defaultIdMethod="native">
+
+    <table name="propel_brand">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="varchar" primaryString="1" size="100" />
+    </table>
+
+</database>

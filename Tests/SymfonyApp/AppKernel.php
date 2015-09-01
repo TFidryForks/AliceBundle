@@ -21,6 +21,7 @@ use Hautelook\AliceBundle\Tests\SymfonyApp\TestBundle\Bundle\ABundle\TestABundle
 use Hautelook\AliceBundle\Tests\SymfonyApp\TestBundle\Bundle\BBundle\TestBBundle;
 use Hautelook\AliceBundle\Tests\SymfonyApp\TestBundle\Bundle\CBundle\TestCBundle;
 use Hautelook\AliceBundle\Tests\SymfonyApp\TestBundle\TestBundle;
+use Propel\PropelBundle\PropelBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -36,11 +37,12 @@ class AppKernel extends Kernel
             new DoctrinePHPCRBundle(),
             new FrameworkBundle(),
             new HautelookAliceBundle(),
+            new PropelBundle(),
+            new PsyshBundle(),
             new TestBundle(),
             new TestABundle(),
             new TestBBundle(),
             new TestCBundle(),
-            new PsyshBundle(),
         ];
     }
 

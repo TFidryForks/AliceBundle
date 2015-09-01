@@ -18,7 +18,7 @@
     "require": {
         "php": ">=5.4.0",
         "nelmio/alice": "~2.0-dev",
-        "symfony/finder": "^2.7"
+        "symfony/finder": "~2.3"
     },
   "require-dev": {
         "doctrine/doctrine-bundle": "~1.2",
@@ -31,12 +31,13 @@
         "fabpot/php-cs-fixer": "^1.9",
         "jackalope/jackalope-doctrine-dbal": "^1.2",
         "phpunit/phpunit": "^4.7",
+        "propel/propel1": "~1.6",
+        "propel/propel-bundle": "~1.4",
         "symfony/console": "~2.1",
         "symfony/framework-bundle": "~2.1",
         "symfony/yaml": "~2.1",
         "symfony/validator": "~2.1",
-        "theofidry/psysh-bundle": "~1.1",
-        "symfony/expression-language": "^2.7"
+        "theofidry/psysh-bundle": "~1.1"
     },
     "suggest": {
         "theofidry/alice-fixtures-extension": "Behat extension for HautelookAliceBundle",

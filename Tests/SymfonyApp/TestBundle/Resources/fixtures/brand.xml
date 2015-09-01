@@ -1,0 +1,5 @@
+<Fixtures>
+    <Object Namespace="Hautelook\AliceBundle\Tests\SymfonyApp\TestBundle\Entity\Brand">
+        <o1 name="My title" />
+    </Object>
+</Fixtures>

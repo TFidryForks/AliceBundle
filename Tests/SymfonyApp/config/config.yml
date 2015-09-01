@@ -47,3 +47,12 @@ doctrine_phpcr:
     odm:
         auto_mapping: true
         auto_generate_proxy_classes: %kernel.debug%
+
+propel:
+    path:       "%kernel.root_dir%/../../vendor/propel/propel1"
+    phing_path: "%kernel.root_dir%/../../vendor/phing"
+    dbal:
+        driver: pdo_sqlite
+        dsn: sqlite:path=%kernel.cache_dir%/dbpropel.sqlite;dbname=test_database
+        options: {}
+        attributes: {}
