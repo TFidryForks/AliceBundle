@@ -199,6 +199,7 @@ class Loader implements LoaderInterface
                 }
 
                 $objects = array_merge($objects, $dataSet);
+                $references = array_merge($references, $dataSet);
             } catch (\UnexpectedValueException $exception) {
                 $this->registerErrorMessage($fixtureFilePath, $exception->getMessage());
             }
