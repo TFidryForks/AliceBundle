@@ -199,6 +199,14 @@ class Loader implements LoaderInterface
 
                 $references = array_merge($references, $dataSet);
             } catch (\UnexpectedValueException $exception) {
+                if (1 !== preg_match(
+                        '/^Instance mask ".*" did not match any existing instance, make sure the object is created after its references$/',
+                        $exception->getMessage()
+                    )
+                ) {
+                    throw $exception;
+                }
+
                 $this->registerErrorMessage($fixtureFilePath, $exception->getMessage());
             }
         }
